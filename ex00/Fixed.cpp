@@ -6,7 +6,7 @@
 /*   By: mprofett <mprofett@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:21:37 by mprofett          #+#    #+#             */
-/*   Updated: 2023/08/01 16:03:48 by mprofett         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:23:23 by mprofett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,4 @@ void	Fixed::setRawBits (int const raw)
 	this->_width = raw;
 }
 
-const int	_binary_point = 8;
+const int	Fixed::_binary_point = 8;

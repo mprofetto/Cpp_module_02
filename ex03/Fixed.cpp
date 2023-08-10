@@ -6,7 +6,7 @@
 /*   By: mprofett <mprofett@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:21:37 by mprofett          #+#    #+#             */
-/*   Updated: 2023/08/04 14:46:57 by mprofett         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:31:31 by mprofett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ Fixed	Fixed::operator*(const Fixed &to_multiply_by) const
 
 Fixed	Fixed::operator/(const Fixed &to_divide_by) const
 {
-	Fixed	result(this->toFloat() * to_divide_by.toFloat());
+	Fixed	result(this->toFloat() / to_divide_by.toFloat());
 
 	return (result);
 }
@@ -134,43 +134,43 @@ Fixed	Fixed::operator--(int)
 bool	Fixed::operator<(const Fixed &number) const
 {
 	if (this->toFloat() < number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator>(const Fixed &number) const
 {
 	if (this->toFloat() > number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator<=(const Fixed &number) const
 {
 	if (this->toFloat() <= number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator>=(const Fixed &number) const
 {
 	if (this->toFloat() >= number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator==(const Fixed &number) const
 {
 	if (this->toFloat() == number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator!=(const Fixed &number) const
 {
 	if (this->toFloat() != number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 std::ostream	&operator<<(std::ostream &o, Fixed const &fixed)

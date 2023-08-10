@@ -6,7 +6,7 @@
 /*   By: mprofett <mprofett@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:21:37 by mprofett          #+#    #+#             */
-/*   Updated: 2023/08/04 13:30:09 by mprofett         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:15:39 by mprofett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,23 @@ Fixed	Fixed::operator-(const Fixed &to_retrieve) const
 
 Fixed	Fixed::operator*(const Fixed &to_multiply_by) const
 {
-	Fixed	result(this->toFloat() * to_multiply_by.toFloat());
+	Fixed	result;
 
+	result.setRawBits((this->getRawBits() * to_multiply_by.getRawBits()) / (1 << this->_binary_point));
 	return (result);
 }
 
 Fixed	Fixed::operator/(const Fixed &to_divide_by) const
 {
-	Fixed	result(this->toFloat() * to_divide_by.toFloat());
+	Fixed	result;
 
+	result.setRawBits(roundf(((double)this->getRawBits() / to_divide_by.getRawBits()) * (1 << this->_binary_point)));
 	return (result);
 }
 
 Fixed	&Fixed::operator++(void)
 {
-	++this->_width;
+	this->_width++;
 	return (*this);
 }
 
@@ -113,13 +115,13 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed old(*this);
 
-	++(*this);
+	this->_width++;
 	return (old);
 }
 
 Fixed	&Fixed::operator--(void)
 {
-	--this->_width;
+	this->_width--;
 	return (*this);
 }
 
@@ -127,50 +129,50 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed old(*this);
 
-	--(*this);
+	this->_width++;
 	return (old);
 }
 
 bool	Fixed::operator<(const Fixed &number) const
 {
 	if (this->toFloat() < number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator>(const Fixed &number) const
 {
 	if (this->toFloat() > number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator<=(const Fixed &number) const
 {
 	if (this->toFloat() <= number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator>=(const Fixed &number) const
 {
 	if (this->toFloat() >= number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator==(const Fixed &number) const
 {
 	if (this->toFloat() == number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 bool	Fixed::operator!=(const Fixed &number) const
 {
 	if (this->toFloat() != number.toFloat())
-		return (0);
-	return (1);
+		return (true);
+	return (false);
 }
 
 std::ostream	&operator<<(std::ostream &o, Fixed const &fixed)
@@ -178,6 +180,7 @@ std::ostream	&operator<<(std::ostream &o, Fixed const &fixed)
 	o << fixed.toFloat();
 	return (o);
 }
+
 
 
 /*Static functions*/
